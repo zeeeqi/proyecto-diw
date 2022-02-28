@@ -1,0 +1,35 @@
+<div class="container">
+  <p class="h1 text-center mt-3">Horario {{this.ciclo?.curso}}º {{this.ciclo?.nombre}} {{this.ciclo?.turno | titlecase}}</p>
+  <table class="table w-100 mx-auto mt-5">
+    <thead>
+      <tr>
+        <th scope="col">Hora</th>
+        <th scope="col">Lunes</th>
+        <th scope="col">Martes</th>
+        <th scope="col">Miércoles</th>
+        <th scope="col">Jueves</th>
+        <th scope="col">Viernes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let hora of this.ciclo?.horario?.horas">
+        <td>
+          {{ getHora(hora.hora_inicio, hora.hora_fin) }}
+        </td>
+        <td *ngFor="let modulo of hora.modulos">
+          {{ modulo.abrev | uppercase }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="ciclo?.turno == 'tarde'" class="h6">
+    * Los viernes el horario es de 15:00 a 21:00 h.
+  </p>
+
+  <p class="h3">Módulos</p>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let modulo of this.ciclo?.modulos">{{modulo.abrev | uppercase}} - {{modulo.nombre}}</li>
+
+  </ul>
+</div>

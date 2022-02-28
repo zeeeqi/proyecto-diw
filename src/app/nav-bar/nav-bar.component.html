@@ -1,0 +1,42 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false"
+      >
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+
+      <a mat-list-item (click)="toggle('smr')">Horarios SMR</a>
+      <a *ngIf="toggleSMR == true" class="bg-dark text-white" mat-list-item [routerLink]="['/horario','SMR','1','mañana']">1ºSMR</a>
+      <a *ngIf="toggleSMR == true" class="bg-dark text-white" mat-list-item [routerLink]="['/horario','SMR','2','mañana']">2ºSMR</a>
+      <a mat-list-item (click)="toggle('daw')">Horarios DAW</a>
+      <a *ngIf="toggleDAW == true" class="bg-dark text-white" mat-list-item [routerLink]="['/horario','DAW','1','mañana']">1ºDAW Mañana</a>
+      <a *ngIf="toggleDAW == true" class="bg-dark text-white" mat-list-item [routerLink]="['/horario','DAW','1','tarde']">1ºDAW Tarde</a>
+      <a *ngIf="toggleDAW == true" class="bg-dark text-white" mat-list-item [routerLink]="['/horario','DAW','2','mañana']">2ºDAW Mañana</a>
+      <a *ngIf="toggleDAW == true" class="bg-dark text-white" mat-list-item [routerLink]="['/horario','DAW','2','tarde']">2ºDAW Tarde</a>
+      <a mat-list-item routerLink='pasen'>Pasen</a>
+      <a mat-list-item routerLink='convalidaciones'>Convalidaciones</a>
+      <a mat-list-item routerLink='fct'>FCT</a>
+      <a mat-list-item routerLink='instancia'>Instancia</a>
+      <a mat-list-item routerLink='itinerarios'>Itinerarios formativos</a>
+      <a mat-list-item routerLink='contacto'>Contacto</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Guía del estudiante de ciclo</span>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
